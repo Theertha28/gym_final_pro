@@ -67,9 +67,9 @@ class BottomNavbarScreen extends StatefulWidget {
 }
 
 class _BottomNavBarScreenState extends State<BottomNavbarScreen> {
-  int _page = 0;
+  int page = 0;
 
-  List<Widget> _screens = [
+  List<Widget> screens = [
     HomeScreen(),
     MembersScreen(),
     Container(color: Colors.black),
@@ -100,13 +100,12 @@ class _BottomNavBarScreenState extends State<BottomNavbarScreen> {
         animationDuration: Duration(milliseconds: 600),
         onTap: (index) {
           setState(() {
-            _page = index;
+            page = index;
           });
         },
         letIndexChange: (index) => true,
       ),
-      // Display the screen based on the selected page
-      body: _screens[_page],
+      body: screens[page],
     );
   }
 }

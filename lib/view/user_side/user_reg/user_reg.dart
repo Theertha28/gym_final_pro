@@ -3,14 +3,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:gym_final_pro/dummy_db.dart';
 import 'package:gym_final_pro/view/login_screen/login_screen.dart';
 
-class RegistrationScreen extends StatefulWidget {
-  const RegistrationScreen({super.key});
+class UserReg extends StatefulWidget {
+  const UserReg({super.key});
 
   @override
-  State<RegistrationScreen> createState() => _RegistrationScreenState();
+  State<UserReg> createState() => _UserRegState();
 }
 
-class _RegistrationScreenState extends State<RegistrationScreen> {
+class _UserRegState extends State<UserReg> {
   bool isPassObscure = true;
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
@@ -55,7 +55,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                   SizedBox(height: 30),
 
-                  // Email
+                  // Email Field
                   TextFormField(
                     controller: emailController,
                     decoration: InputDecoration(
@@ -98,7 +98,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                   SizedBox(height: 20),
 
-                  // Password
+                  // Password Field
                   TextFormField(
                     controller: passController,
                     obscureText: isPassObscure,
@@ -112,7 +112,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                       filled: true,
-                      fillColor: Colors.white.withOpacity(0.5),
+                      fillColor: Colors.white
+                          .withOpacity(0.5), // Background with transparency
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
@@ -155,6 +156,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                   SizedBox(height: 20),
 
+                  // Confirm Password Field
                   TextFormField(
                     controller: confirmController,
                     obscureText: isPassObscure,
@@ -168,7 +170,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                       filled: true,
-                      fillColor: Colors.white.withOpacity(0.5),
+                      fillColor: Colors.white
+                          .withOpacity(0.5), // Background with transparency
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
@@ -211,7 +214,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                   SizedBox(height: 20),
 
-                  // Sign Up
+                  // Sign Up Button
                   InkWell(
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
@@ -253,6 +256,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                   Spacer(),
 
+                  // Sign In Link
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [

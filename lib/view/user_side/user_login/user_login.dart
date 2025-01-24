@@ -1,20 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:gym_final_pro/dummy_db.dart';
-import 'package:gym_final_pro/view/login_screen/login_screen.dart';
+import 'package:gym_final_pro/view/bottom_navbar_screen/bottom_navbar_screen.dart';
+import 'package:gym_final_pro/view/registration_screen/registration_screen.dart';
 
-class RegistrationScreen extends StatefulWidget {
-  const RegistrationScreen({super.key});
+class UserLogin extends StatefulWidget {
+  const UserLogin({super.key});
 
   @override
-  State<RegistrationScreen> createState() => _RegistrationScreenState();
+  State<UserLogin> createState() => _UserLoginState();
 }
 
-class _RegistrationScreenState extends State<RegistrationScreen> {
-  bool isPassObscure = true;
+class _UserLoginState extends State<UserLogin> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passController = TextEditingController();
-  TextEditingController confirmController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -26,65 +24,67 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
-                fit: BoxFit.cover,
                 image: AssetImage('assets/images/bgimg.webp'),
+                fit: BoxFit.cover,
               ),
             ),
           ),
-          Container(
-            color: Colors.black.withOpacity(0.5),
-          ),
+          // Your form
           Padding(
             padding:
                 const EdgeInsets.only(left: 20, right: 20, top: 50, bottom: 20),
             child: Form(
               key: _formKey,
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  // Header Text
-                  Text(
-                    "Create Account",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.cormorantGaramond(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w800,
-                      color: Colors.amber,
+                  Container(
+                    child: Text(
+                      "Log In ",
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.cormorantGaramond(
+                        fontSize: 30,
+                        fontWeight: FontWeight.w800,
+                        color: Colors.amber,
+                      ),
                     ),
                   ),
                   SizedBox(height: 30),
 
-                  // Email
                   TextFormField(
                     controller: emailController,
                     decoration: InputDecoration(
                       contentPadding:
-                          EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                      filled: true,
+                      fillColor: Colors.white
+                          .withOpacity(0.5), // Light background color
                       hintText: "Your Email Address",
                       hintStyle: GoogleFonts.cormorantGaramond(
                         color: Colors.grey.shade800,
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.5),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Colors.amber,
+                          color: Colors.amber, // Change to a more visible color
+                          width: 2,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
                           color: Colors.amber,
+                          width: 2,
                         ),
                       ),
                       errorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
                           color: Colors.red.shade400,
+                          width: 2,
                         ),
                       ),
                     ),
@@ -98,51 +98,46 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                   SizedBox(height: 20),
 
-                  // Password
+                  // Password input field with better visibility
                   TextFormField(
+                    obscureText: true,
                     controller: passController,
-                    obscureText: isPassObscure,
                     decoration: InputDecoration(
                       contentPadding:
-                          EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                          EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                      filled: true,
+                      fillColor: Colors.white
+                          .withOpacity(0.5), // Light background color
                       hintText: "Your Password",
                       hintStyle: GoogleFonts.cormorantGaramond(
                         color: Colors.grey.shade800,
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.5),
                       enabledBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
-                          color: Colors.amber,
+                          color: Colors.amber, // More visible border color
+                          width: 2,
                         ),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
                           color: Colors.amber,
+                          width: 2,
                         ),
                       ),
                       errorBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: BorderSide(
                           color: Colors.red.shade400,
+                          width: 2,
                         ),
                       ),
-                      suffixIcon: InkWell(
-                        onTap: () {
-                          setState(() {
-                            isPassObscure = !isPassObscure;
-                          });
-                        },
-                        child: Icon(
-                          isPassObscure
-                              ? Icons.visibility_off_rounded
-                              : Icons.visibility,
-                          color: Colors.amber,
-                        ),
+                      suffixIcon: Icon(
+                        Icons.visibility_off_rounded,
+                        color: Colors.amber,
                       ),
                     ),
                     validator: (value) {
@@ -155,83 +150,73 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                   SizedBox(height: 20),
 
-                  TextFormField(
-                    controller: confirmController,
-                    obscureText: isPassObscure,
-                    decoration: InputDecoration(
-                      contentPadding:
-                          EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-                      hintText: "Confirm Your Password",
-                      hintStyle: GoogleFonts.cormorantGaramond(
-                        color: Colors.grey.shade800,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.5),
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.amber,
-                        ),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.amber,
-                        ),
-                      ),
-                      errorBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(10),
-                        borderSide: BorderSide(
-                          color: Colors.red.shade400,
-                        ),
-                      ),
-                      suffixIcon: InkWell(
-                        onTap: () {
-                          setState(() {
-                            isPassObscure = !isPassObscure;
-                          });
-                        },
-                        child: Icon(
-                          isPassObscure
-                              ? Icons.visibility_off_rounded
-                              : Icons.visibility,
-                          color: Colors.amber,
-                        ),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value == passController.text) {
-                        return null;
-                      } else {
-                        return "Password doesn't match";
-                      }
-                    },
-                  ),
-                  SizedBox(height: 20),
-
-                  // Sign Up
-                  InkWell(
-                    onTap: () {
-                      if (_formKey.currentState!.validate()) {
-                        DummyDb.StoredEmail = emailController.text;
-                        DummyDb.StoredPass = passController.text;
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            backgroundColor: Colors.amber.shade600,
-                            content: Text(
-                              "Registration Success",
-                              style: GoogleFonts.cormorantGaramond(
-                                color: Colors.white,
-                                fontSize: 18,
-                                letterSpacing: 1,
-                                fontWeight: FontWeight.w800,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Container(
+                              padding: EdgeInsets.all(3),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                border: Border.all(color: Colors.grey),
+                              ),
+                              child: Icon(
+                                Icons.check,
+                                size: 12,
+                                color: Colors.amber,
                               ),
                             ),
                           ),
-                        );
-                      }
+                          Text(
+                            "Remember me",
+                            style: GoogleFonts.cormorantGaramond(
+                              color: Colors.white,
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Text(
+                        "Forgot password",
+                        style: GoogleFonts.cormorantGaramond(
+                          color: Colors.white,
+                          fontSize: 15,
+                          letterSpacing: 1,
+                          fontWeight: FontWeight.w900,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 20),
+
+                  // Sign in button
+                  InkWell(
+                    onTap: () {
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => BottomNavbarScreen()),
+                        (route) => false,
+                      );
+
+                      // if(_formKey.currentState!.validate()){
+                      //   if(emailController.text==DummyDb.StoredEmail &&
+                      //   passController.text==DummyDb.StoredPass){
+                      //     Navigator.pushAndRemoveUntil(context,
+                      //      MaterialPageRoute(builder:
+                      //      (context)=>BottomNavbarScrpeen(),),
+                      //      (route)=>false,
+                      //      );
+                      //   }else{
+                      //     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      //       backgroundColor: Colors.red,
+                      //       content: Text("Login Failed,Try again")));
+                      //   }
+                      // }
                     },
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: 10),
@@ -241,11 +226,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: Text(
-                        "Sign Up",
+                        "Log in",
                         style: GoogleFonts.cormorantGaramond(
                           color: Colors.black,
                           fontSize: 18,
-                          letterSpacing: 1,
                           fontWeight: FontWeight.w900,
                         ),
                       ),
@@ -253,30 +237,31 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   ),
                   Spacer(),
 
+                  // Sign up link
                   Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        "Already have an account?",
+                        "Don't have an account?",
                         style: GoogleFonts.cormorantGaramond(
                           color: Colors.white,
                           fontSize: 18,
-                          fontWeight: FontWeight.w700,
+                          fontWeight: FontWeight.w800,
                         ),
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pop(
+                          Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => LoginScreen()));
+                                  builder: (context) => RegistrationScreen()));
                         },
                         child: Text(
-                          "Log In",
+                          "Create Account",
                           style: GoogleFonts.cormorantGaramond(
                             color: Colors.amber,
                             fontSize: 18,
-                            fontWeight: FontWeight.w700,
+                            fontWeight: FontWeight.w900,
                           ),
                         ),
                       ),

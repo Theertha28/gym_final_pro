@@ -29,7 +29,6 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
             ),
           ),
-          // Your form
           Padding(
             padding:
                 const EdgeInsets.only(left: 20, right: 20, top: 50, bottom: 20),
